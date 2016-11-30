@@ -7,14 +7,14 @@ package com.ironstarfitness.thefitnessguarding;
 public class Article {
     private String mTitle;
     private String mSection;
-    private String mUrl;
+    private String mUri;
 
 
-    public Article(String title, String section, String url) {
+    public Article(String title, String section, String uri) {
 
         this.mTitle = title;
         this.mSection = section;
-        this.mUrl = url;
+        this.mUri = uri;
     }
 
     public String getTitle() {
@@ -25,7 +25,7 @@ public class Article {
         return mSection;
     }
 
-    public String getURL() {
-        return mUrl;
+    public String getURI() {
+        return mUri;
     }
 }

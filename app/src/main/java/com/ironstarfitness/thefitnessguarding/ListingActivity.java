@@ -3,15 +3,17 @@ package com.ironstarfitness.thefitnessguarding;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.AdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,8 @@ public class ListingActivity extends AppCompatActivity implements LoaderCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list);
-        ListView articleListView = (ListView) findViewById(R.id.list);
+        setContentView(R.layout.activity_listing);
+        ListView articleListView = (ListView) findViewById(R.id.article_view);
         mEmptyStateView = (TextView) findViewById(R.id.empty_view);
         articleListView.setEmptyView(mEmptyStateView);
 
@@ -46,6 +48,18 @@ public class ListingActivity extends AppCompatActivity implements LoaderCallback
         }
         mAdapter = new ArticleAdapter(this, new ArrayList<Article>());
         articleListView.setAdapter(mAdapter);
+
+        articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Article currentArticle = mAdapter.getItem(position);
+                Uri webUri =Uri.parse(currentArticle.getURI());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, webUri);
+                startActivity(websiteIntent);
+
+            }
+        });
+
 
     }
 
@@ -69,5 +83,10 @@ public class ListingActivity extends AppCompatActivity implements LoaderCallback
         if (articles != null && !articles.isEmpty()) {
             mAdapter.addAll(articles);
         }
+    }
+
+    public void refresh(View view){
+        Intent articleListing = new Intent(ListingActivity.this, ListingActivity.class);
+        startActivity(articleListing);
     }
 }
