@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TheFitnessGuarding</string>
+    <string name="refresh">Refresh</string>
+    <string name="title"> Title: </string>
+    <string name="section"> Section: </string>
+    <string name="no_internet">No Internet</string>
+    <string name="no_articles">No Articles</string>
+</resources>
